@@ -38,12 +38,18 @@ setLocalStream(stream)
       );
       setPeerConnection(peerConnection);
       setRemoteStream(remoteStream);
+      console.log("peerConnection",typeOfCall);
+      
     }
   }, [localStream]);
+  console.log(remoteStream,'remoteStream');
+  
   useEffect(() => {
     if (typeOfCall && peerConnection) {
       const socket = socketConnection(videoData.userName);
       clientSocketListeners(socket,typeOfCall,callStatus,updateCallStatus,peerConnection);
+      console.log("clientSocketListeners",typeOfCall);
+
     }
   }, [typeOfCall, peerConnection]);
   console.log(callStatus,'home');
@@ -54,7 +60,7 @@ setLocalStream(stream)
   const call = async () => {
     initCall("offer");
   };
-  
+
   const answer = (callData) => {
     initCall("answer");
     setOfferData(callData);

@@ -30,8 +30,12 @@ localStream.getTracks().forEach(track=>{
 
     peerConnection.addEventListener('icecandidate',e=>{
         console.log("Found and ice candidate!")
+        console.log("Found and ice candidate!",e.candidate,1)
+
         if(e.candidate){
             // emit the new ice cand. to the signaling server
+            console.log('hello');
+            
             socket.emit('sendIceCandidateToSignalingServer',{
                 iceCandidate: e.candidate,
                 iceUserName: userName,
@@ -41,6 +45,8 @@ localStream.getTracks().forEach(track=>{
     })
 
     peerConnection.addEventListener('track',e=>{
+        console.log('track');
+        
         e.streams[0].getTracks().forEach(track=>{
             remoteStream.addTrack(track,remoteStream)
             console.log("This should add some video/audio to the remote feed...")

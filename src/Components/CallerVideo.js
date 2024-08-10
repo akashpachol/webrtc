@@ -11,13 +11,12 @@ const CallerVideo = () => {
   const localFeedEl = useRef(null);
   const navigate = useNavigate();
   const [offerCreated, setOfferCreated] = useState(false);
-  const videoData = useSelector((state) => state.video);  // This should match the key used in the rootReducer
+  const videoData = useSelector((state) => state.video);  
   const { peerConnection, remoteStream, localStream,callStatus } = useWebRTC();
 
   useEffect(() => {
-    if (!localStream) {
-      navigate(`/`);
-    } else {
+    if (!localStream)navigate(`/`);
+     else {
       remoteFeedEl.current.srcObject = remoteStream;
       localFeedEl.current.srcObject = localStream;
     }
@@ -46,20 +45,8 @@ const CallerVideo = () => {
   return (
     <div>
       <div className="videos">
-        <video
-          id="local-feed"
-          ref={localFeedEl}
-          autoPlay
-          controls
-          playsInline
-        ></video>
-        <video
-          id="remote-feed"
-          ref={remoteFeedEl}
-          autoPlay
-          controls
-          playsInline
-        ></video>
+        <video id="local-feed"ref={localFeedEl} autoPlay controls playsInline></video>
+        <video id="remote-feed" ref={remoteFeedEl} autoPlay controls playsInline ></video>
       </div>
 
       <ActionButtons localStream={localStream} />

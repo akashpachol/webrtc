@@ -38,6 +38,7 @@ const AnswerVideo = () => {
 
       const socket = socketConnection(videoData.userName);
       await socket.emitWithAck("newAnswer", copyOfferData);
+      
     };
 
     if (!answerCreated) {
